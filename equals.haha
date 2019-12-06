@@ -1,0 +1,18 @@
+predicate equal(x : Z, y : Z) = (x = y)
+//predicates can only be used in annotations. They are of no use in the logic of the code (such as the if statement)
+function equals(x : Z, y : Z) : Z
+var ret : Z
+begin
+	ret := 0
+	{ret = 0}
+	if x = y then
+	begin
+		ret := 1
+		{x = y /\ ret = 1}
+		skip
+	end
+	{(x = y /\ ret = 1)\/(x != y /\ ret = 0)}
+	equals := ret
+	{(x = y /\ ret = 1)\/(x != y /\ ret = 0) /\ equals = ret}
+	skip
+end
